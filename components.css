@@ -1,0 +1,101 @@
+/* Date Strip Styles */
+.date-strip {
+    display: flex;
+    overflow-x: auto;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE/Edge */
+}
+
+.date-strip::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+.date-item {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    height: 60px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-secondary);
+}
+
+.date-item:hover {
+    background: var(--bg);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.date-item.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+}
+
+.date-item .day-name {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.date-item .day-number {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* Attendance Buttons */
+.btn-attendance {
+    width: 100px;
+    padding: 0.6rem;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    color: var(--text);
+}
+
+.btn-attendance:hover {
+    border-color: var(--text-secondary);
+    background: var(--bg-elevated);
+}
+
+.btn-attendance.status-present {
+    background: rgba(34, 197, 94, 0.2);
+    border-color: rgba(34, 197, 94, 0.5);
+    color: #15803d;
+    /* Green 700 */
+}
+
+.dark-theme .btn-attendance.status-present {
+    color: #4ade80;
+    /* Green 400 */
+}
+
+.btn-attendance.status-absent {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.5);
+    color: #b91c1c;
+    /* Red 700 */
+}
+
+.dark-theme .btn-attendance.status-absent {
+    color: #f87171;
+    /* Red 400 */
+}

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Singhi GharKhata - Household Helper Manager</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+</head>
+
+<body>
+  <div id="auth-shell" class="auth-shell">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="app-title">Singhi GharKhata</div>
+        <h1 class="auth-title">Welcome to Singhi GharKhata</h1>
+        <p class="auth-subtitle">Please login to manage your household records</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab auth-tab-active" data-mode="login">Login</button>
+        <button type="button" class="auth-tab" data-mode="signup">Sign up</button>
+      </div>
+
+      <form id="login-form" class="auth-form auth-form-active">
+        <div class="auth-field">
+          <label for="login-name">Name</label>
+          <input id="login-name" type="text" required />
+        </div>
+        <div class="auth-field">
+          <label for="login-password">Password</label>
+          <input id="login-password" type="password" required />
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%;">Login</button>
+      </form>
+
+      <form id="signup-form" class="auth-form">
+        <div class="auth-field">
+          <label for="signup-name">Name</label>
+          <input id="signup-name" type="text" required />
+        </div>
+        <div class="auth-field">
+          <label for="signup-password">Password</label>
+          <input id="signup-password" type="password" minlength="4" required />
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%;">Create account</button>
+      </form>
+
+      <p class="small-muted" style="margin-top: 1rem;">
+        This login is stored only on this device and is not a real online account.
+      </p>
+    </div>
+  </div>
+
+  <div class="app" id="app-root" style="display: none;">
+    <nav class="sidebar">
+      <div class="logo-area">
+        <div class="app-title">Singhi GharKhata</div>
+      </div>
+      <div class="nav-links">
+        <button class="nav-btn active" data-view="helpers">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          Helpers
+        </button>
+        <button class="nav-btn" data-view="attendance">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+          Attendance
+        </button>
+        <button class="nav-btn" data-view="milk">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 21a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V8H7v13Z" />
+            <path d="M5 2h14" />
+            <path d="M5 8h14" />
+            <path d="M5 5h14" />
+          </svg>
+          Milk
+        </button>
+        <button class="nav-btn" data-view="payments">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+            <line x1="1" y1="10" x2="23" y2="10" />
+          </svg>
+          Payments
+        </button>
+        <button class="nav-btn" data-view="dashboard">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="9" />
+            <rect x="14" y="3" width="7" height="5" />
+            <rect x="14" y="12" width="7" height="9" />
+            <rect x="3" y="16" width="7" height="5" />
+          </svg>
+          Dashboard
+        </button>
+        <button class="nav-btn" data-view="settings">
+          <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1Z" />
+          </svg>
+          Settings
+        </button>
+      </div>
+    </nav>
+
+    <div class="main-wrapper">
+      <header class="top-bar">
+        <div class="page-title" id="page-title-display">Overview</div> <!-- Dynamic Title Ref -->
+        <div class="header-controls">
+          <label class="month-select-label">
+            Month:
+            <input type="month" id="month-selector" />
+          </label>
+          <div class="user-badge" id="user-badge" style="display:none;">
+            <span class="user-badge-name" id="user-name-label"></span>
+            <button type="button" class="user-logout-btn" id="logout-btn">Logout</button>
+          </div>
+          <button id="theme-toggle" class="theme-toggle" type="button">🌞 / 🌙</button>
+        </div>
+      </header>
+
+      <main class="main">
+        <!-- Helpers View -->
+        <section id="view-helpers" class="view active-view">
+          <h1>Helpers</h1>
+
+          <form id="helper-form" class="card">
+            <input type="hidden" id="helper-id" />
+
+            <div class="form-row">
+              <label for="helper-name">Name</label>
+              <input id="helper-name" type="text" required />
+            </div>
+
+            <div class="form-row">
+              <label for="helper-role">Role</label>
+              <select id="helper-role" required>
+                <option value="">Select role</option>
+                <option value="Maid">Maid</option>
+                <option value="Milkman">Milkman</option>
+                <option value="Cook">Cook</option>
+                <option value="Watchman">Watchman</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-row" id="helper-ppl-row" style="display: none;">
+              <label for="helper-ppl">Default Price / Liter (₹)</label>
+              <input id="helper-ppl" type="number" min="0" step="0.1" />
+            </div>
+
+            <div class="form-row" id="helper-salary-row">
+              <label for="helper-salary">Monthly Salary (₹)</label>
+              <input id="helper-salary" type="number" min="0" step="0.01" required />
+            </div>
+
+            <div class="form-row">
+              <label for="helper-payment-type">Payment Type</label>
+              <select id="helper-payment-type" required>
+                <option value="Monthly">Monthly</option>
+                <option value="Daily">Daily</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="helper-start-date">Start Date</label>
+              <input id="helper-start-date" type="date" required />
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">Save Helper</button>
+              <button type="reset" class="btn-secondary" id="helper-form-reset">Clear</button>
+            </div>
+          </form>
+
+          <section class="card">
+            <h2>All Helpers</h2>
+            <table class="table" aria-label="Helpers list">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Monthly Salary</th>
+                  <th>Payment Type</th>
+                  <th>Start Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="helpers-table-body"></tbody>
+            </table>
+          </section>
+        </section>
+
+        <!-- Attendance View -->
+        <section id="view-attendance" class="view">
+          <h1>Attendance</h1>
+
+          <section class="card">
+            <div class="form-row">
+              <div id="attendance-date-strip" class="date-strip"></div>
+              <input type="hidden" id="attendance-date" />
+            </div>
+            <p>Mark helpers as Present (P) or Absent (A) for the selected day.</p>
+          </section>
+
+          <section class="card">
+            <h2>Helpers for the Day</h2>
+            <div id="attendance-summary-text" class="small-muted"></div>
+            <table class="table" aria-label="Daily attendance">
+              <thead>
+                <tr>
+                  <th>Helper</th>
+                  <th>Role</th>
+                  <th>Attendance</th>
+                </tr>
+              </thead>
+              <tbody id="attendance-table-body"></tbody>
+            </table>
+          </section>
+
+          <section class="card">
+            <h2>Monthly Summary</h2>
+            <p class="small-muted">For <strong id="attendance-month-label"></strong>.</p>
+            <table class="table" aria-label="Monthly attendance summary">
+              <thead>
+                <tr>
+                  <th>Helper</th>
+                  <th>Role</th>
+                  <th>Present / Days</th>
+                </tr>
+              </thead>
+              <tbody id="attendance-month-summary-body"></tbody>
+            </table>
+          </section>
+        </section>
+
+        <!-- Milk View -->
+        <section id="view-milk" class="view">
+          <h1>Milk Delivery</h1>
+
+          <section class="card">
+            <h2>Add Milk Entry</h2>
+            <form id="milk-form">
+              <div class="form-row">
+                <label for="milk-date">Date</label>
+                <input type="date" id="milk-date" required />
+              </div>
+
+              <div class="form-row">
+                <label for="milk-helper">Milkman</label>
+                <select id="milk-helper"></select>
+              </div>
+
+              <div class="form-row">
+                <label for="milk-new-helper-name">Add Milkman</label>
+                <div style="display: flex; gap: 0.5rem;">
+                  <input type="text" id="milk-new-helper-name" placeholder="New milkman name" />
+                  <button type="button" class="btn-secondary" id="milk-add-helper-btn">Add</button>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <label for="milk-liters">Liters</label>
+                <input type="number" id="milk-liters" min="0" step="0.1" required />
+              </div>
+
+              <div class="form-row">
+                <label for="milk-price">Price / Liter (₹)</label>
+                <input type="number" id="milk-price" min="0" step="0.1" />
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">Save Entry</button>
+              </div>
+            </form>
+          </section>
+
+          <div class="card mb-lg" id="milk-summary-card" style="display:none;">
+            <h3>Monthly Summary</h3>
+            <table class="table" style="margin-top: 0.5rem;" aria-label="Milk Summary">
+              <thead>
+                <tr>
+                  <th>Milkman</th>
+                  <th>Total Liters</th>
+                  <th>Est. Bill</th>
+                </tr>
+              </thead>
+              <tbody id="milk-summary-body"></tbody>
+            </table>
+          </div>
+
+          <div class="card">
+            <h3>Monthly Milk Log</h3>
+            <p class="small-muted">Showing entries for <strong id="milk-month-label"></strong>.</p>
+            <table class="table" aria-label="Monthly milk log">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Milkman</th>
+                  <th>Liters</th>
+                  <th>Price / L</th>
+                  <th>Total</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="milk-table-body"></tbody>
+            </table>
+        </section>
+        </section>
+
+        <!-- Payments View -->
+        <section id="view-payments" class="view">
+          <h1>Payments</h1>
+
+          <div class="form-actions" style="margin-bottom: 1rem; display:flex; flex-wrap:wrap; gap:0.75rem;">
+            <button type="button" class="btn-secondary" id="payments-export-pdf-btn">Export monthly statement
+              (PDF)</button>
+          </div>
+
+          <section class="card">
+            <h2>Salary Overview</h2>
+            <p>Calculated from attendance for <strong id="payments-month-label"></strong>.</p>
+            <div id="maids-summary-text" class="small-muted" style="margin-bottom: 0.5rem;"></div>
+            <table class="table" aria-label="Salary overview">
+              <thead>
+                <tr>
+                  <th>Helper</th>
+                  <th>Role</th>
+                  <th>Present / Days</th>
+                  <th>Calculated Salary</th>
+                  <th>Paid</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="salary-table-body"></tbody>
+            </table>
+          </section>
+
+          <section class="card">
+            <h2>Milk Bill</h2>
+            <p>Monthly total based on milk delivery entries.</p>
+            <div class="summary-grid">
+              <div class="summary-item">
+                <div class="summary-label">Total Liters</div>
+                <div class="summary-value"><span id="milk-total-liters">0</span> <small>L</small></div>
+              </div>
+              <div class="summary-item">
+                <div class="summary-label">Total Amount</div>
+                <div class="summary-value" id="milk-total-amount">₹0</div>
+              </div>
+              <div class="summary-item">
+                <div class="summary-label">Outstanding</div>
+                <div class="summary-value" id="milk-outstanding-amount">₹0</div>
+              </div>
+            </div>
+
+            <h3 style="margin-top: 1rem; font-size: 0.95rem;">By Milkman</h3>
+            <table class="table" aria-label="Milk by milkman">
+              <thead>
+                <tr>
+                  <th>Milkman</th>
+                  <th>Total Liters</th>
+                  <th>Total Amount</th>
+                  <th>Paid</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="milk-by-helper-body"></tbody>
+            </table>
+
+            <!-- Global button hidden via JS now -->
+            <div class="form-actions" style="margin-top: 0.75rem;">
+              <button type="button" class="btn-primary" id="milk-pay-btn" style="display:none;">Mark all Paid</button>
+            </div>
+          </section>
+
+          <section class="card">
+            <h2>Payment History</h2>
+            <table class="table" aria-label="Payment history">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>To / For</th>
+                  <th>Month</th>
+                  <th>Amount</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="payments-history-body"></tbody>
+            </table>
+          </section>
+        </section>
+
+        <!-- Dashboard View (placeholder for now) -->
+        <section id="view-dashboard" class="view">
+          <h1>Dashboard</h1>
+          <p>Monthly summary and charts will come here.</p>
+        </section>
+
+        <!-- Settings View -->
+        <section id="view-settings" class="view">
+          <h1>Settings</h1>
+
+          <section class="card mb-lg">
+            <h2>Data &amp; backup</h2>
+            <p class="small-muted">
+              Singhi GharKhata stores everything locally in this browser. Use a backup file to move data between devices
+              or keep a
+              copy before clearing it.
+            </p>
+
+            <div class="form-actions" style="margin-top: 1rem; gap: 0.75rem; display: flex; flex-wrap: wrap;">
+              <button type="button" class="btn-primary" id="settings-export-btn">Download backup</button>
+              <button type="button" class="btn-secondary" id="settings-import-btn">Restore from file</button>
+              <button type="button" class="btn-secondary" id="settings-clear-btn"
+                style="margin-left:auto; color: #b91c1c; border-color: rgba(248,113,113,0.5);">Reset all data</button>
+            </div>
+
+            <input type="file" id="settings-import-file" accept="application/json" style="display:none" />
+            <p class="small-muted" id="settings-status-text" style="margin-top:0.75rem;"></p>
+          </section>
+
+          <section class="card">
+            <h2>About this app</h2>
+            <p class="small-muted">
+              Singhi GharKhata runs completely in your browser using local storage. There is no server and your data
+              never leaves this
+              machine unless you export it.
+            </p>
+          </section>
+        </section>
+      </main>
+    </div> <!-- End main-wrapper -->
+  </div> <!-- End app -->
+  <!-- Chart.js for dashboard charts -->
+  <script src="node_modules/chart.js/dist/chart.umd.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
